@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "App Pizzaria",
+  title: "Sistema Pizzaria",
   description: "A melhor pizza da região",
 };
 
