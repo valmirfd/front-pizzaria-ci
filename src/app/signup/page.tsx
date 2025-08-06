@@ -35,9 +35,11 @@ export default function Signup() {
             }
 
             console.log(response.data);
+            const expressTime = 60 * 60 * 2 * 1000;
 
-            (await cookies()).set("session", response.data.token, {           
-                path: "/siginup",
+            (await cookies()).set("session", response.data.token, {
+                maxAge: expressTime,
+                path: "/",
                 httpOnly: false,
                 secure: process.env.NODE_ENV === "production"
             })

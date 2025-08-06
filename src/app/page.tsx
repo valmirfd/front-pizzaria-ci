@@ -1,15 +1,53 @@
+import { cookies } from 'next/headers';
 import styles from './page.module.scss';
 import logoImg from '/public/logo.svg';
 import Image from 'next/image';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
+import { api } from '@/services/api';
 
 
 
 export default function Page() {
 
-  function handleLogin(formData: FormData) {
-    const email = formData.get("email");
-    const password = formData.get("password");
+  async function handleLogin(formData: FormData) {
+    "use server"
+
+    const email = formData.get("email")
+    const password = formData.get("password")
+
+    if (email === "" || password === "") {
+      return;
+    }
+
+    try {
+
+      const response = await api.post("login", {
+        email,
+        password
+      })
+
+      if (!response.data.token) {
+        return;
+      }
+
+      console.log(response.data);
+
+      const expressTime = 60 * 60 * 2 * 1000;
+      (await cookies()).set("session", response.data.token, {
+        maxAge: expressTime,
+        path: "/",
+        httpOnly: false,
+        secure: process.env.NODE_ENV === "production"
+      })
+
+    } catch (err) {
+      console.log(err);
+      return;
+    }
+
+    redirect("/dashboard")
+
   }
 
   return (
