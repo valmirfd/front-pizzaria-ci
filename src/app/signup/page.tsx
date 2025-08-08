@@ -22,6 +22,7 @@ export default function Signup() {
             return;
         }
 
+        
         try {
             const response = await api.post("register", {
                 username,
@@ -33,7 +34,7 @@ export default function Signup() {
             if (!response.data.token) {
                 return;
             }
-
+          
             console.log(response.data);
             const expressTime = 60 * 60 * 2 * 1000;
 
