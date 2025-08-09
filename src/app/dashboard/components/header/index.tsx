@@ -5,7 +5,7 @@ import styles from './styles.module.scss';
 import Image from 'next/image';
 import logoImg from '/public/logo.svg';
 import { useRouter } from 'next/navigation';
-import { LogOutIcon } from 'lucide-react';
+import { LogOutIcon, Plus } from 'lucide-react';
 import { deleteCookie } from 'cookies-next';
 
 
@@ -33,12 +33,8 @@ export function Header() {
                     />
                 </Link>
                 <nav>
-                    <Link href="/dashboard/category">
-                        Categoria
-                    </Link>
-                    <Link href="/dashboard/product">
-                        Produto
-                    </Link>
+                    <Link href="/dashboard/category">+ Categoria</Link>
+                    <Link href="/dashboard/product">+ Produto</Link>
 
                     <form action={handleLogout}>
                         <button type='submit'>

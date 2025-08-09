@@ -11,6 +11,20 @@ export function Orders() {
                     <RefreshCw size={24} color="#3fffa3" />
                 </button>
             </section>
+
+            <section className={styles.listOrders}>
+
+                <button className={styles.orderItem}>
+                    <div className={styles.tag}></div>
+                    <span>Mesa : 10</span>
+                </button>
+
+                <button className={styles.orderItem}>
+                    <div className={styles.tag}></div>
+                    <span>Mesa : 13</span>
+                </button>
+
+            </section>
         </main>
     );
 }
