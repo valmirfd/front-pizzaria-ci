@@ -1,7 +1,10 @@
+import { Form } from "./components/form";
+
+
 export default function Product() {
     return (
         <main>
-            <h1>Página Produtos</h1>
+            <Form />
         </main>
     );
 }
