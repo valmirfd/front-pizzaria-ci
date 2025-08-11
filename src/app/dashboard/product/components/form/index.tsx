@@ -5,8 +5,9 @@ import styles from './styles.module.scss';
 import { UploadCloud } from 'lucide-react';
 import Image from 'next/image';
 import { Button } from '@/app/dashboard/components/button';
-import { getCookieClient } from '@/lib/cookieClient';
 import { api } from '@/services/api';
+import { getCookieClient } from '@/lib/cookieClient';
+import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 
 
@@ -31,7 +32,7 @@ export function Form({ categories }: Props) {
         const description = formData.get("description");
 
         if (!name || !categoryIndex || !price || !description || !image) {
-            //toast.warning("Preencha todos os campos!")
+            toast.warning("Preencha todos os campos!")
             return;
         }
 
@@ -52,38 +53,27 @@ export function Form({ categories }: Props) {
         })
             .catch((err) => {
                 console.log(err);
-                //toast.warning("Falha ao cadastrar esse produto!");
+                toast.warning("Falha ao cadastrar esse produto!");
                 return;
             })
 
-        console.log("Cadastrado com sucesso!");
-
-        //toast.success("Produto registrado com sucesso!");
+        toast.success("Produto registrado com sucesso!");
         router.push("/dashboard");
-
-
-
     }
-
-
-
 
     function handleFile(e: ChangeEvent<HTMLInputElement>) {
         if (e.target.files && e.target.files[0]) {
             const image = e.target.files[0];
 
             if (image.type !== "image/jpeg" && image.type !== "image/png") {
-                console.log("Formato proibido");
+                toast.warning("Formato não permitido!")
                 return;
             }
 
             setImage(image);
             setPreviewImage(URL.createObjectURL(image));
-
-
         }
     }
-
 
 
     return (

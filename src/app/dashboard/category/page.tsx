@@ -1,8 +1,10 @@
-import styles from './styles.module.scss'
-import { Button } from "@/app/dashboard/components/button"
-import { api } from '@/services/api'
-import { redirect } from 'next/navigation'
-import { getCookieServer } from '@/lib/cookieServer'
+import styles from './styles.module.scss';
+import { Button } from "@/app/dashboard/components/button";
+import { api } from '@/services/api';
+import { redirect } from 'next/navigation';
+import { getCookieServer } from '@/lib/cookieServer';
+
+
 
 export default function Category() {
 
@@ -11,7 +13,10 @@ export default function Category() {
 
         const nome = formData.get("nome")
 
-        if (nome === "") return;
+        if (nome === "") {
+            console.log("Preencha o nome da categoria!");
+            return;
+        }
 
         const data = {
             nome: nome,
