@@ -1,13 +1,13 @@
 "use client"
 
-import Link from 'next/link';
-import styles from './styles.module.scss';
-import Image from 'next/image';
-import logoImg from '/public/logo.svg';
-import { useRouter } from 'next/navigation';
-import { LogOutIcon, Plus } from 'lucide-react';
-import { deleteCookie } from 'cookies-next';
-
+import Link from 'next/link'
+import styles from './styles.module.scss'
+import Image from 'next/image'
+import logoImg from '/public/logo.svg'
+import { LogOutIcon } from 'lucide-react'
+import { deleteCookie } from 'cookies-next'
+import { useRouter } from 'next/navigation'
+//import { toast } from 'sonner'
 
 export function Header() {
     const router = useRouter();
@@ -32,9 +32,14 @@ export function Header() {
                         quality={100}
                     />
                 </Link>
+
                 <nav>
-                    <Link href="/dashboard/category">+ Categoria</Link>
-                    <Link href="/dashboard/product">+ Produto</Link>
+                    <Link href="/dashboard/category">
+                        Categoria
+                    </Link>
+                    <Link href="/dashboard/product">
+                        Produto
+                    </Link>
 
                     <form action={handleLogout}>
                         <button type='submit'>
@@ -43,6 +48,6 @@ export function Header() {
                     </form>
                 </nav>
             </div>
-        </header >
-    );
+        </header>
+    )
 }

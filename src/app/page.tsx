@@ -31,7 +31,6 @@ export default function Page() {
         return;
       }
 
-      console.log(response.data);
 
       const expressTime = 60 * 60 * 2 * 1000;
       (await cookies()).set("session", response.data.token, {
@@ -76,7 +75,7 @@ export default function Page() {
               placeholder='Digite sua senha'
             />
 
-            <button type="submit">
+            <button type="submit" className={styles.button}>
               Login
             </button>
 
