@@ -1,18 +1,29 @@
 "use client"
 
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useState } from 'react';
 import styles from './styles.module.scss';
 import { UploadCloud } from 'lucide-react';
-
+import Image from 'next/image';
 
 
 export function Form() {
+    const [image, setImage] = useState<File>();
+    const [previewImage, setPreviewImage] = useState("");
+
 
     function handleFile(e: ChangeEvent<HTMLInputElement>) {
         if (e.target.files && e.target.files[0]) {
             const image = e.target.files[0];
 
-            console.log(image);
+            if (image.type !== "image/jpeg" && image.type !== "image/png") {
+                console.log("Formato proibido");
+                return;
+            }
+
+            setImage(image);
+            setPreviewImage(URL.createObjectURL(image));
+
+
         }
     }
 
@@ -31,6 +42,18 @@ export function Form() {
                         required
                         onChange={handleFile}
                     />
+
+                    {previewImage && (
+                        <Image
+                            alt='Imagem de preview'
+                            src={previewImage}
+                            className={styles.preview}
+                            fill={true}
+                            quality={100}
+                            priority={true}
+                        />
+                    )}
+
                 </label>
             </form>
         </main>
