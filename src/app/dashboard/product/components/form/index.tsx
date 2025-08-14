@@ -13,7 +13,7 @@ import { useRouter } from 'next/navigation';
 
 interface CategoryProps {
     id: string;
-    nome: string;
+    name: string;
 }
 
 interface Props {
@@ -27,9 +27,14 @@ export function Form({ categories }: Props) {
 
     async function handleRegisterProduct(formData: FormData) {
         const categoryIndex = formData.get("category");
-        const name = formData.get("nome");
+        const name = formData.get("name");
         const price = formData.get("price");
         const description = formData.get("description");
+
+        console.log(categoryIndex);
+        console.log(name);
+        console.log(price);
+        console.log(description);
 
         if (!name || !categoryIndex || !price || !description || !image) {
             toast.warning("Preencha todos os campos!")
@@ -38,7 +43,9 @@ export function Form({ categories }: Props) {
 
         const data = new FormData();
 
-        data.append("nome", name);
+        console.log(data);
+
+        data.append("name", name);
         data.append("price", price);
         data.append("description", description);
         data.append("category_id", categories[Number(categoryIndex)].id);
@@ -46,7 +53,7 @@ export function Form({ categories }: Props) {
 
         const token = await getCookieClient();
 
-        await api.post("produtos", data, {
+        await api.post("products/create", data, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -108,13 +115,13 @@ export function Form({ categories }: Props) {
                 <select name="category">
                     {categories.map((category, index) => (
                         <option key={category.id} value={index}>
-                            {category.nome}
+                            {category.name}
                         </option>
                     ))}
                 </select>
                 <input
                     type="text"
-                    name="nome"
+                    name="name"
                     placeholder="Digite o nome do produto"
                     required
                     className={styles.input}

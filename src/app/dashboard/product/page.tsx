@@ -7,7 +7,7 @@ import { getCookieServer } from "@/lib/cookieServer";
 export default async function Product() {
 
     const token = await getCookieServer();
-    const response = await api.get("categorias", {
+    const response = await api.get("categories/list", {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -15,7 +15,7 @@ export default async function Product() {
     
     return (
         <main>
-            <Form categories={response.data} />
+            <Form categories={response.data.data} />
         </main>
     );
 }

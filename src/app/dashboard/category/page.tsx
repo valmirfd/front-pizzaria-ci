@@ -11,20 +11,20 @@ export default function Category() {
     async function handleRegisterCategory(formData: FormData) {
         "use server"
 
-        const nome = formData.get("nome")
+        const name = formData.get("name")
 
-        if (nome === "") {
+        if (name === "") {
             console.log("Preencha o nome da categoria!");
             return;
         }
 
         const data = {
-            nome: nome,
+            name: name,
         }
 
         const token = await getCookieServer();
 
-        await api.post("categorias", data, {
+        await api.post("categories/create", data, {
             headers: {
                 Authorization: `Bearer ${token}`
             }
@@ -49,7 +49,7 @@ export default function Category() {
             >
                 <input
                     type="text"
-                    name="nome"
+                    name="name"
                     placeholder="Nome da categoria, ex: Pizzas"
                     required
                     className={styles.input}

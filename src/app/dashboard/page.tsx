@@ -10,13 +10,13 @@ async function getOrders(): Promise<OrderProps[] | []> {
 
         const token = await getCookieServer();
 
-        const response = await api.get("orders", {
+        const response = await api.get("orders/list", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         });
 
-        return response.data || [];
+        return response.data.data || [];
 
     } catch (err) {
         console.log(err);
