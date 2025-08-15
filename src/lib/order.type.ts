@@ -1,5 +1,5 @@
 
-export interface OrderProps{
+export interface OrderProps {
   id: string;
   table: number;
   nome: string;
