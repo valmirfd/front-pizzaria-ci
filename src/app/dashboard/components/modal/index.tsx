@@ -4,10 +4,13 @@ import styles from './styles.module.scss';
 import { X } from 'lucide-react';
 import { use } from 'react';
 import { OrderContext } from '@/providers/order';
-
+import Image from 'next/image';
 
 export function Modalorder() {
     const { onRequestClose, order, finishOrder } = use(OrderContext);
+
+    //1755187986_7c2b4e4ab2ccaf1aae10.png
+    //console.log(order[0].image);
 
     async function handleFinishOrder() {
         await finishOrder(order[0].order_id)
@@ -44,6 +47,21 @@ export function Modalorder() {
 
                         </section>
                     ))}
+
+                    <div className={styles.banner}>
+
+                        <Image
+                            src={`https://ieqpsj.com.br/public/assets/images/produtos/1755100860_ece05d157e3e7aaaf8ff.jpg`}
+                            alt='Imagem do produto'
+                            width={500}
+                            height={250}
+                        />
+
+
+
+                    </div>
+
+
 
                     <button className={styles.buttonOrder} onClick={handleFinishOrder}>
                         Concluir pedido
