@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 
 export interface OrderItemProps {
     id_principal: string;
-    amount: string;
+    amount: number;
     id_oder: string;
     id_product: string;
     data_order: string;

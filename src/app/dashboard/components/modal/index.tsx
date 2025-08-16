@@ -5,6 +5,8 @@ import { X } from 'lucide-react';
 import { use } from 'react';
 import { OrderContext } from '@/providers/order';
 import Image from 'next/image';
+import { calculateTotalOrder } from '@/lib/helper';
+
 
 export function Modalorder() {
     const { onRequestClose, order, finishOrder } = use(OrderContext);
@@ -38,8 +40,17 @@ export function Modalorder() {
 
                     {order.map(item => (
                         <section className={styles.item} key={item.id_principal}>
+                            <div className={styles.banner}>
+                                <Image
+                                    src={`https://ieqpsj.com.br/public/assets/images/produtos/1755100860_ece05d157e3e7aaaf8ff.jpg`}
+                                    alt='Imagem do produto'
+                                    width={80}
+                                    height={80}
+                                />
+                            </div>
                             <span>
-                                Qtd: {item.amount} - <b>{item.name_product}</b>
+                                Qtd: {item.amount} - <b>{item.name_product} </b>
+                                - R$ {parseFloat(item.price) * item.amount}
                             </span>
                             <span className={styles.description}>
                                 {item.description}
@@ -48,18 +59,7 @@ export function Modalorder() {
                         </section>
                     ))}
 
-                    <div className={styles.banner}>
-
-                        <Image
-                            src={`https://ieqpsj.com.br/public/assets/images/produtos/1755100860_ece05d157e3e7aaaf8ff.jpg`}
-                            alt='Imagem do produto'
-                            width={500}
-                            height={250}
-                        />
-
-
-
-                    </div>
+                    <h3 className={styles.total}>Valor total: R$ {calculateTotalOrder(order)}</h3>
 
 
 
