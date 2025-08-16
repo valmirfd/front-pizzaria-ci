@@ -7,10 +7,11 @@ import { OrderContext } from '@/providers/order';
 
 
 export function Modalorder() {
-    const { onRequestClose, order } = use(OrderContext);
+    const { onRequestClose, order, finishOrder } = use(OrderContext);
 
-    console.log(order[0].table);
-    //console.log(order[0].created_at);
+    async function handleFinishOrder() {
+        await finishOrder(order[0].order_id)
+    }
 
     return (
         <dialog className={styles.dialogContainer}>
@@ -27,13 +28,13 @@ export function Modalorder() {
                     </span>
 
                     {order[0]?.nome_mesa && (
-                        <span className={styles.nome}>
+                        <span className={styles.name}>
                             <b>{order[0].nome_mesa}</b>
                         </span>
                     )}
 
                     {order.map(item => (
-                        <section className={styles.item} >
+                        <section className={styles.item} key={item.id_principal}>
                             <span>
                                 Qtd: {item.amount} - <b>{item.name_product}</b>
                             </span>
@@ -44,12 +45,7 @@ export function Modalorder() {
                         </section>
                     ))}
 
-
-
-
-
-
-                    <button className={styles.buttonOrder}>
+                    <button className={styles.buttonOrder} onClick={handleFinishOrder}>
                         Concluir pedido
                     </button>
 
