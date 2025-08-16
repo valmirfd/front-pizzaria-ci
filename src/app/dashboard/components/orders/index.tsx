@@ -5,7 +5,7 @@ import styles from './styles.module.scss';
 import { RefreshCw } from 'lucide-react';
 import { OrderProps } from '@/lib/order.type';
 import { Modalorder } from '@/app/dashboard/components/modal';
-import { OrderContext } from '@/providers/orders';
+import { OrderContext } from '@/providers/order';
 
 
 
@@ -17,8 +17,8 @@ interface Props {
 export function Orders({ orders }: Props) {
     const { isOpen, onRequestOpen } = use(OrderContext);
 
-    function handleDetailOrder(order_id: string) {
-        onRequestOpen(order_id)
+    async function handleDetailOrder(order_id: string) {
+        await onRequestOpen(order_id)
     }
 
 

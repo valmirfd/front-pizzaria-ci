@@ -22,7 +22,7 @@ interface Props {
 
 export function Form({ categories }: Props) {
     const router = useRouter();
-    const [image, setImage] = useState<File>();
+    const [images, setImages] = useState<File>();
     const [previewImage, setPreviewImage] = useState("");
 
     async function handleRegisterProduct(formData: FormData) {
@@ -31,25 +31,20 @@ export function Form({ categories }: Props) {
         const price = formData.get("price");
         const description = formData.get("description");
 
-        console.log(categoryIndex);
-        console.log(name);
-        console.log(price);
-        console.log(description);
 
-        if (!name || !categoryIndex || !price || !description || !image) {
+        if (!name || !categoryIndex || !price || !description || !images) {
             toast.warning("Preencha todos os campos!")
             return;
         }
 
         const data = new FormData();
 
-        console.log(data);
 
         data.append("name", name);
         data.append("price", price);
         data.append("description", description);
         data.append("category_id", categories[Number(categoryIndex)].id);
-        data.append("images[]", image);
+        data.append("images[]", images);
 
         const token = await getCookieClient();
 
@@ -70,15 +65,15 @@ export function Form({ categories }: Props) {
 
     function handleFile(e: ChangeEvent<HTMLInputElement>) {
         if (e.target.files && e.target.files[0]) {
-            const image = e.target.files[0];
+            const images = e.target.files[0];
 
-            if (image.type !== "image/jpeg" && image.type !== "image/png" && image.type !== "image/webp" && image.type !== "image/jpg") {
+            if (images.type !== "image/jpeg" && images.type !== "image/png" && images.type !== "image/webp" && images.type !== "image/jpg") {
                 toast.warning("Formato não permitido!")
                 return;
             }
 
-            setImage(image);
-            setPreviewImage(URL.createObjectURL(image));
+            setImages(images);
+            setPreviewImage(URL.createObjectURL(images));
         }
     }
 

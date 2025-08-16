@@ -48,6 +48,13 @@
     font-size: 16px;
 }
 
+.dados {
+    display: flex;
+    flex-direction: column;
+    margin: 16px 0;
+    font-size: 16px;
+}
+
 .description {
     color: #CCC;
     margin-top: 4px;
