@@ -42,7 +42,7 @@ export function Modalorder() {
                         <section className={styles.item} key={item.id_principal}>
                             <div className={styles.banner}>
                                 <Image
-                                    src={`https://ieqpsj.com.br/public/assets/images/produtos/1755100860_ece05d157e3e7aaaf8ff.jpg`}
+                                    src={`https://ieqpsj.com.br/public/assets/images/produtos/${item.image}`}
                                     alt='Imagem do produto'
                                     width={80}
                                     height={80}
