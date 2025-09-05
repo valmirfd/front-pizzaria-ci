@@ -1,62 +1,38 @@
 import styles from './styles.module.scss';
-import { Button } from "@/app/dashboard/components/button";
 import { api } from '@/services/api';
-import { redirect } from 'next/navigation';
 import { getCookieServer } from '@/lib/cookieServer';
+import { CategoryProps } from "@/lib/category.type";
 
+async function getCategories(): Promise<CategoryProps[] | []> {
 
-
-export default function Category() {
-
-    async function handleRegisterCategory(formData: FormData) {
-        "use server"
-
-        const name = formData.get("name")
-
-        if (name === "") {
-            console.log("Preencha o nome da categoria!");
-            return;
-        }
-
-        const data = {
-            name: name,
-        }
+    try {
 
         const token = await getCookieServer();
 
-        await api.post("categories/create", data, {
+        const response = await api.get("categories/list", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
-        })
-            .catch((err) => {
-                console.log(err);
-                return;
-            })
+        });
 
-        redirect("/dashboard")
+        return response.data.data || [];
 
+    } catch (err) {
+        console.log(err);
+        return [];
     }
+}
+
+
+
+export default async function Category() {
+
+    const categories = await getCategories();
 
 
     return (
-        <main className={styles.container}>
-            <h1>Nova Categoria</h1>
-
-            <form
-                className={styles.form}
-                action={handleRegisterCategory}
-            >
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Nome da categoria, ex: Pizzas"
-                    required
-                    className={styles.input}
-                />
-
-                <Button name="Cadastrar" />
-            </form>
-        </main>
+        <>
+            <h1>Aqui categories</h1>
+        </>
     )
 }
